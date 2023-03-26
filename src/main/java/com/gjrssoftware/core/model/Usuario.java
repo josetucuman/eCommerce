@@ -10,15 +10,16 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tbl_user")
+@Table(name = "tbl_users")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class UsuarioEntity {
+public class Usuario {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -52,5 +53,12 @@ public class UsuarioEntity {
 
     @Column(name = "user_pwd")
     private String password;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Producto> productos;
+
+    @OneToMany(mappedBy = "usuario")
+    private List<Orden> ordenes;
+
 
 }

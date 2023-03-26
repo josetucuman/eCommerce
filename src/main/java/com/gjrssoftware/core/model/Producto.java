@@ -46,5 +46,7 @@ public class Producto {
     @NotNull
     @Column(name = "product_quantity")
     private int cantidad;
+    @ManyToOne
+    private Usuario usuario;
 
 }

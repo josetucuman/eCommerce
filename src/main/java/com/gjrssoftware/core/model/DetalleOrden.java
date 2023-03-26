@@ -5,19 +5,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
 import java.util.UUID;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @ToString
 @Entity
-@Table(name = "tbl_order")
-public class OrdenEntity {
+@Table(name = "tbl_detail_order")
+public class DetalleOrden {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -25,13 +25,16 @@ public class OrdenEntity {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
-    @Column(name = "id_order", updatable = false, nullable = false)
+    @Column(name = "id_detail_order", updatable = false, nullable = false)
     @Size(max=32)
-
     private UUID id;
-
-    private String numero;
-    private LocalDate fechaCreacion;
-    private LocalDate fechaRecibida;
+    private String nombre;
+    private double cantidad;
+    private double precio;
     private double total;
+    @OneToOne
+    private Orden orden;
+
+    @OneToOne
+    private Producto producto;
 }
